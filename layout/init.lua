@@ -4,15 +4,10 @@ local top_panel = require('layout.top-panel')
 
 -- Create a wibox for each screen and add it
 screen.connect_signal("request::desktop_decoration", function(s)
-  if s.index == 1 then
-      -- Create the left_panel
-      s.left_panel = left_panel(s)
-      -- Create the Top bar
-      s.top_panel = top_panel(s, true)
-    else
-      -- Create the Top bar
-      s.top_panel = top_panel(s, false)
-    end
+    -- Create the left_panel
+    s.left_panel = left_panel(s)
+    -- Create the Top bar
+    s.top_panel = top_panel(s, true)
 end)
 
 
