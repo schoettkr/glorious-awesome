@@ -13,16 +13,22 @@ return {
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
+    'xmodmap ~/.xmodmap &',
+    'redshift',
+    'caffeine -a',
     'picom -b --experimental-backends --dbus --config ' .. filesystem.get_configuration_dir() .. '/configuration/picom.conf', -- Compositor
-    'blueman-applet', -- Bluetooth tray icon
-    'xfce4-power-manager --no-daemon --debug', -- Power manager
-    '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
+    -- 'blueman-applet', -- Bluetooth tray icon
+    -- 'xfce4-power-manager --no-daemon --debug', -- Power manager
+    -- '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', -- credential manager
     'xrdb $HOME/.Xresources', -- X Colors
+    'dropbox',
     'nm-applet', -- NetworkManager Applet
-    'mpd', -- Music Server
-    'pulseeffects --gapplication-service', -- Equalizer
-    'redshift-gtk -l 14.45:121.05', -- Redshift
-    'xautolock -time 5 -locker "mantablockscreen -sc" -detectsleep' -- Auto lock
+    '~/.local/bin/bitwarden'
+    -- 'bitwarden'
+    -- 'redshift', -- Redshift
+    -- 'mpd', -- Music Server
+    -- 'pulseeffects --gapplication-service', -- Equalizer
+    -- 'xautolock -time 5 -locker "mantablockscreen -sc" -detectsleep' -- Auto lock
   },
 
   -- List of binaries and functions to execute a certain task
