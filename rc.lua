@@ -13,6 +13,32 @@ local gears = require('gears')
 local awful = require('awful')
 local beautiful = require('beautiful')
 require('awful.autofocus')
+-- 
+-- {{{ Error handling
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+-- if _G.awesome.startup_errors then
+--   awful.tooltip({visible = true,
+--                  text = awesome.startup_errors })
+-- end
+
+-- awful.tooltip({visible=true, text = 'hi wie gehts'})
+-- tt.bg = beautiful.bg_normal
+
+-- Handle runtime errors after startup
+-- do
+--     local in_error = false
+--     awesome.connect_signal("debug::error", function (err)
+--         if in_error then return end
+--         in_error = true
+
+--         naughty.notify({ preset = naughty.config.presets.critical,
+--                          title = "Oops, an error happened!",
+--                          text = tostring(err) })
+--         in_error = false
+--     end)
+-- end
+-- }}}
 
 -- Theme
 beautiful.init(require('theme'))
