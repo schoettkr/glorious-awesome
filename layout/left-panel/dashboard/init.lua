@@ -96,7 +96,7 @@ return function(_, panel)
           widget = mat_list_item,
         },
         require('layout.left-panel.dashboard.quick-settings'),
-        require('layout.left-panel.dashboard.hardware-monitor'),
+        -- require('layout.left-panel.dashboard.hardware-monitor'),
         require('layout.left-panel.dashboard.action-center'),
       },
     },
