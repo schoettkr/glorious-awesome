@@ -7,7 +7,7 @@ local ss = {}
 
 local capture_screen = function(mode)
   screen_shot_script = [[
-    dir=$HOME/Pictures/Screenshots
+    dir=$HOME/library/images/misc
 
     if [ ! -d $dir ]; then
     mkdir -p $dir
