@@ -32,8 +32,9 @@ local wall_dir = filesystem.get_configuration_dir() .. 'theme/wallpapers/'
 -- Wallpapers filename
 wallpaper_Day = 'day-wallpaper.jpg'
 wallpaper_Noon = 'noon-wallpaper.jpg'
-wallpaper_Night = 'night-wallpaper.jpg'
-wallpaper_Midnight = 'midnight-wallpaper.jpg'
+wallpaper_Night = 'yosemite-5.jpg'
+-- wallpaper_Midnight = 'midnight-wallpaper.jpg'
+wallpaper_Midnight = 'test2.jpg'
 
 --
 -- Time event: midnight, day time, noon time, night time
