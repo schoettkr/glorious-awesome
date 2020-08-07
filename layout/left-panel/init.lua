@@ -17,6 +17,7 @@ local left_panel = function(screen)
     x = screen.geometry.x,
     y = screen.geometry.y,
     ontop = true,
+    -- bg = beautiful.background.hue_750,
     bg = beautiful.background.hue_800,
     fg = beautiful.fg_normal
   }
