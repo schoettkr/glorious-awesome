@@ -3,13 +3,19 @@ local filesystem = require('gears.filesystem')
 return {
   -- List of apps to start by default on some actions
   default = {
-    terminal = 'kitty',
-    editor = 'atom',
+    terminal = 'termite',
+    editor = 'emacs',
     rofi = 'rofi -show Search -modi Search:' .. filesystem.get_configuration_dir() .. '/configuration/rofi/sidebar/rofi-web-search.py' ..
       ' -theme ' .. filesystem.get_configuration_dir() .. '/configuration/rofi/sidebar/rofi.rasi',
-    rofiappmenu = 'rofi -show drun -theme ' .. filesystem.get_configuration_dir() .. '/configuration/rofi/appmenu/drun.rasi',
+    rofiappmenu = 'rofi -fullscreen -show drun -theme ' .. filesystem.get_configuration_dir() .. '/configuration/rofi/appmenu/drun.rasi',
     lock = 'mantablockscreen -sc',
-    quake = 'kitty --name QuakeTerminal'
+    quake = 'termite',
+    -- browser = 'firefox',
+    browser = 'google-chrome-stable',
+    fileManager = 'nemo',
+    applist = "rofi -show",
+    monitor = 'termite -e htop --name monitor'
+    -- monitor = 'google-chrome-stable --app=http://localhost:19999'
   },
   -- List of apps to start once on start-up
   run_on_start_up = {
