@@ -1,7 +1,7 @@
 configuration {
   show-icons:                     true;
   icon-theme:                     "korla";
-  font:                           "Neue Haas Unica Pro Bold 9";
+  font:                           "Bront 14";
   drun-display-format:            "{name}";
 }
 

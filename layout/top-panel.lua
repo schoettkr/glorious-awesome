@@ -44,7 +44,7 @@ end
 local month_calendar = awful.widget.calendar_popup.month({
 	start_sunday = true,
 	spacing = 10,
-	font = 'SFNS Display 10',
+	font = 'SFNS Display 14',
 	long_weekdays = true,
 	margin = 0, -- 10
 	style_month = { border_width = 0, padding = 12, shape = cal_shape, padding = 25},

@@ -206,7 +206,7 @@ local TaskList = function(s)
     s,
     awful.widget.tasklist.filter.currenttags,
     tasklist_buttons,
-    {},
+    {font = "Bront 12"},
     list_update,
     wibox.layout.fixed.horizontal()
   )
