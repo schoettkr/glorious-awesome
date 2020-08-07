@@ -146,13 +146,14 @@ local TopPanel = function(s, offset)
       layout = wibox.layout.fixed.horizontal,
       s.systray,
       require('widget.systemtray'),
-      require('widget.package-updater'),
-      require('widget.music'),
-      require('widget.bluetooth'),
-      require('widget.wifi'),
-      require('widget.battery'),
+      -- require('widget.package-updater'),
+      -- require('widget.music'),
+      -- require('widget.mem'),
+      -- require('widget.bluetooth'),
+      -- require('widget.wifi'),
+      -- require('widget.battery'),
       require('widget.search'),
-      require('widget.right-dashboard'),
+      -- require('widget.right-dashboard'),
     }
   }
 
