@@ -18,8 +18,8 @@ configuration {
 window {
   transparency:                   "real";
   background-color:               @background;
-  height:                         742px;
-  width:                          1321px;
+/*  height:                         742px; */
+/*  width:                          1321px; */
   location:                       northwest;
   anchor:                         northwest;
   x-offset:                       45;
