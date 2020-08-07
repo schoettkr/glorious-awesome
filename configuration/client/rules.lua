@@ -2,7 +2,9 @@ local awful = require('awful')
 local gears = require('gears')
 local client_keys = require('configuration.client.keys')
 local client_buttons = require('configuration.client.buttons')
-
+local apps = require('configuration.apps')
+-- local screen_width = awful.screen.focused().geometry.width
+-- local screen_height = awful.screen.focused().geometry.height
 -- Rules
 awful.rules.rules = {
   -- All clients will match this rule.
@@ -58,6 +60,7 @@ awful.rules.rules = {
   {
     rule_any = {
       class = {
+        "Termite",
         "URxvt",
         "XTerm",
         "UXTerm",
@@ -68,26 +71,73 @@ awful.rules.rules = {
     except_any = {
       instance = {
         -- Dont't switch to tag `1` when opening QuakeTerminal
+        'monitor',
+        'yakuake',
         'QuakeTerminal',
+        'Tilda',
+        'tilda',
+        'scratch'
       }
     },
     properties = {
       size_hints_honor = false,
       screen = 1, 
-      tag = '1',
-      switchtotag = true,
+      tag = '3',
+      switchtotag = true
     }
   },
 
+  -- {
+  --   rule_any = {
+  --     class = {
+  --       "tilda",
+  --       "Tilda"
+  --      },
+  --   },
+  --   properties = {
+  --     size_hints_honor = false,
+  --     screen = 1, 
+  --     floating = true,
+  --     tag       = mouse.screen.selected_tag,
+  --     placement = awful.placement.bottom_right
+  --   }
+  -- },
+  -- {
+  --   rule_any = {
+  --     instance = { "scratch", "Tilda", "tilda" },
+  --     class = { "scratch", "Tilda", "tilda" }
+  --   },
+  --   properties = {
+  --     skip_taskbar = false,
+  --     floating = true,
+  --     ontop = true,
+  --     minimized = true,
+  --     sticky = true,
+  --     width = screen_width * 0.7,
+  --     height = screen_height * 0.75
+  --   }
+
+    -- callback = function (c)
+    --         awful.placement.centered(c,{honor_padding = true, honor_workarea=true})
+            -- gears.timer.delayed_call(function()
+            --     c.urgent = false
+            -- end)
+        -- end
+    -- },
+    -- 
   -- Browsers
   {
     rule_any = {
       class = {
         "firefox",
+        "Google-chrome",
+        "chromium",
+        "Chromium",
+        "brave",
         "Tor Browser"
       },
     },
-    properties = { screen = 1, tag = '2' }
+    properties = { screen = 1, tag = '1', switchtotag = true }
   },
 
 
@@ -97,11 +147,17 @@ awful.rules.rules = {
       class = {
         "Geany",
         "Atom",
+        "Emacs",
         "Subl3",
         "code-oss"
       },
     },
-    properties = { screen = 1, tag = '3' }
+    properties = { screen = 1, tag = '2', switchtotag = true }
+                   -- , floating = true, placement = awful.placement.centered },
+    -- callback = function (c)
+    --      c:geometry( { width = 1800 , height = 900 } )
+    --      awful.placement.centered(c,nil)
+    --   end
   },
 
   -- File Managers
@@ -109,6 +165,7 @@ awful.rules.rules = {
     rule_any = {
        class = {
          "Nemo",
+         "thunar",
          "File-roller"
        },
     },
@@ -192,7 +249,12 @@ awful.rules.rules = {
     class = {
       "feh",
       "Mugshot",
-      "Pulseeffects"
+      "Pulseeffects",
+      "Io.github.celluloid_player.Celluloid",
+      "bomi",
+      "smplayer",
+      "Bitwarden",
+      "Deezloader"
     },
   },
     properties = {
@@ -202,6 +264,41 @@ awful.rules.rules = {
     ontop = true,
     placement = awful.placement.centered
     }
+  },
+
+  {
+  rule_any = {
+    class = {
+      "mpv",
+    },
+  },
+    properties = {
+    skip_decoration = true,
+    hide_titlebars = true,
+    floating = true,
+    ontop = true,
+    placement = awful.placement.centered
+    },
+      callback = function (c)
+         c:geometry( { width = 1280 , height = 720 } )
+         awful.placement.centered(c,nil)
+      end
+  },
+
+  {
+  rule_any = {
+    class = {
+      "Bitwarden",
+    },
+  },
+  properties = {
+    tag="5",
+    skip_decoration = true,
+    hide_titlebars = true,
+    floating = true,
+    ontop = true,
+    placement = awful.placement.centered
+  }
   },
 
 
@@ -260,6 +357,10 @@ awful.rules.rules = {
       buttons = client_buttons
     }
   }
+
+  -- { rule_any = { class = { "conky", "conky" } },
+  --   properties = { titlebars_enabled = false, floating = true }}
+
 }
 
 
@@ -267,30 +368,30 @@ awful.rules.rules = {
 -- its class or name until is starts up, so we need to catch that signal
 client.connect_signal("property::class",function(c)
 
-  if c.class == 'Spotify' or c.class == 'SuperTuxKart' then
-    -- Check if already opened
-    local app = function(c)
-      if c.class == 'SuperTuxKart' then
-        return awful.rules.match(c, { class = 'SuperTuxKart' } )
-      elseif c.class == 'Spotify' then
-        return awful.rules.match(c, { class = 'Spotify' } )
-      end
-    end
+                        if c.class == 'Spotify' or c.class == 'SuperTuxKart' then
+                          -- Check if already opened
+                          local app = function(c)
+                            if c.class == 'SuperTuxKart' then
+                              return awful.rules.match(c, { class = 'SuperTuxKart' } )
+                            elseif c.class == 'Spotify' then
+                              return awful.rules.match(c, { class = 'Spotify' } )
+                            end
+                          end
 
-    -- Move it to the desired tag in THIS SCREEN
-    local tagName = ''
-    if c.class == 'Spotify' then
-      tagName = '5'
-    elseif c.class == 'SuperTuxKart' then
-      tagName = '6'
-    end
-    local t = awful.tag.find_by_name(awful.screen.focused(), tagName)
-    c:move_to_tag(t)
-    t:view_only()
+                          -- Move it to the desired tag in THIS SCREEN
+                          local tagName = ''
+                          if c.class == 'Spotify' then
+                            tagName = '5'
+                          elseif c.class == 'SuperTuxKart' then
+                            tagName = '6'
+                          end
+                          local t = awful.tag.find_by_name(awful.screen.focused(), tagName)
+                          c:move_to_tag(t)
+                          t:view_only()
 
-    if c.class == 'SuperTuxKart' then
-      c.fullscreen = not c.fullscreen
-      c:raise()
-    end
-  end
+                          if c.class == 'SuperTuxKart' then
+                            c.fullscreen = not c.fullscreen
+                            c:raise()
+                          end
+                        end
 end)
