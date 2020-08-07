@@ -119,3 +119,9 @@ _G.client.connect_signal(
     c.border_color = beautiful.border_normal
   end
 )
+
+-- Focus urgent clients automatically for rofi show
+_G.client.connect_signal("property::urgent", function(c)
+    c.minimized = false
+    c:jump_to()
+end)
