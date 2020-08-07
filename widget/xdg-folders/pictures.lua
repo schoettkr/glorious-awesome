@@ -27,7 +27,7 @@ pic_button:buttons(
       1,
       nil,
       function()
-        awful.spawn.easy_async_with_shell("xdg-open $HOME/Pictures", function(stderr) end, 1)
+        awful.spawn.easy_async_with_shell("xdg-open $HOME/library/images", function(stderr) end, 1)
       end
     )
   )

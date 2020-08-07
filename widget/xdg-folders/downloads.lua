@@ -27,7 +27,7 @@ downloads_button:buttons(
       1,
       nil,
       function()
-        awful.spawn.easy_async_with_shell("xdg-open $HOME/Downloads", function(stderr) end, 1)
+        awful.spawn.easy_async_with_shell("xdg-open $HOME/dls", function(stderr) end, 1)
       end
     )
   )

@@ -27,7 +27,7 @@ docu_button:buttons(
       1,
       nil,
       function()
-        awful.spawn.easy_async_with_shell("xdg-open $HOME/Documents", function(stderr) end, 1)
+        awful.spawn.easy_async_with_shell("xdg-open $HOME/library", function(stderr) end, 1)
       end
     )
   )

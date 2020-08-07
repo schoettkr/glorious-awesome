@@ -27,7 +27,7 @@ videos_button:buttons(
       1,
       nil,
       function()
-        awful.spawn.easy_async_with_shell("xdg-open $HOME/Videos", function(stderr) end, 1)
+        awful.spawn.easy_async_with_shell("xdg-open $HOME/library/videos", function(stderr) end, 1)
       end
     )
   )
