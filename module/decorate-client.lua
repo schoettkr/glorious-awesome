@@ -45,7 +45,7 @@ local function changesOnScreen(currentScreen)
   if (tagIsMax or #clientsToManage == 1) then
     currentScreen.client_mode = 'maximized'
   else
-    currentScreen.client_mode = 'dwindle'
+    currentScreen.client_mode = 'tiled'
   end
 
   for _, client in pairs(clientsToManage) do
