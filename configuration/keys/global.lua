@@ -2,6 +2,7 @@ local awful = require('awful')
 require('awful.autofocus')
 local beautiful = require('beautiful')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
+-- local scratch = require("widget.scratch.scratch")
 
 local modkey = require('configuration.keys.mod').modKey
 local altkey = require('configuration.keys.mod').altKey
@@ -10,7 +11,7 @@ local apps = require('configuration.apps')
 local globalKeys =
   awful.util.table.join(
   -- Hotkeys
-  awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'show help', group = 'awesome'}),
+    awful.key({modkey}, 'F1', function() awful.spawn(apps.default.browser) end, {description = 'open browser', group = 'launcher'}),
   -- Custom Keys
   awful.key(
     {modkey}, 'Return',
@@ -18,22 +19,40 @@ local globalKeys =
       awful.spawn(apps.default.terminal)
     end,
     { description = "Open Terminal", group = "launcher"}),
+
+  -- awful.key({ modkey }, "g", function () scratch.toggle("termite --name=scratch class=scratch", { instance = "scratch" }) end),
+  -- awful.key(
+  --   {modkey}, 'p',
+  --   function()
+  --     awful.spawn(apps.default.terminal, {
+  --                   floating = true,
+  --                   placement=awful.placement.bottom_right
+  --     })
+  --   end,
+  --   { description = "Open Terminal Group", group = "launcher"}),
   awful.key(
-    {modkey}, 'e',
+    {modkey}, 'd',
     function()
-      _G.screen.primary.left_panel:HideDashboard()
-      _G.screen.primary.right_panel:HideDashboard()
+      -- _G.screen.primary.left_panel:HideDashboard()
+      -- _G.screen.primary.right_panel:HideDashboard()
       awful.util.spawn(apps.default.rofiappmenu)
     end,
   { description = "Open Application Drawer", group = "launcher"}),
-  awful.key(
-    {modkey}, 'x',
-    function()
-      if require('widget.right-dashboard') then
-        _G.screen.primary.right_panel:toggle()
-      end
-    end,
-  { description = "Open Notification Center", group = "launcher"}),
+  -- awful.key(
+  --   {modkey}, 'x',
+  --   function()
+  --     if require('widget.right-dashboard') then
+  --       _G.screen.primary.right_panel:toggle()
+  --     end
+  --   end,
+  -- { description = "Open Notification Center", group = "launcher"}),
+  -- awful.key(
+  --   {modkey}, 'x',
+  --   function()
+  --     awful.util.spawn_with_shell('termite -e org-capture')
+  --   end,
+  -- { description = "Open Notification Center", group = "launcher"}),
+
   awful.key(
     {modkey, "Shift"}, 'f',
     function()
@@ -42,9 +61,23 @@ local globalKeys =
     { description = "Open Browser", group = "launcher"}),
 
   awful.key(
-    {modkey, "Shift"}, 'e',
+    {modkey}, 'e',
     function()
-      awful.spawn("nemo")
+      awful.spawn(apps.default.editor)
+    end,
+    { description = "Open Emacs", group = "launcher"}),
+
+  awful.key(
+    {modkey}, 'F2',
+    function()
+      awful.spawn("chromium")
+    end,
+    { description = "Open chromium", group = "launcher"}),
+
+  awful.key(
+    {modkey}, 'F3',
+    function()
+      awful.spawn(apps.default.fileManager)
     end,
     { description = "Open file manager", group = "launcher"}),
 
@@ -76,14 +109,14 @@ local globalKeys =
   { description = "Selected screenshot", group = "Miscellaneous"}),
 
   -- Music Widget
-  awful.key(
-    {modkey}, 'm',
-    function()
-      if require("widget.music") then
-        _G.toggle_player()
-      end
-    end,
-  { description = "Open Music Widget", group = "launcher"}),
+  -- awful.key(
+  --   {modkey}, 'm',
+  --   function()
+  --     if require("widget.music") then
+  --       _G.toggle_player()
+  --     end
+  --   end,
+  -- { description = "Open Music Widget", group = "launcher"}),
 
   -- Toggle System Tray
   awful.key({ 'Control' }, 'Escape', function ()
@@ -122,7 +155,7 @@ local globalKeys =
   -- Default client focus
   awful.key(
     {modkey},
-    'd',
+    'o',
     function()
       awful.client.focus.byidx(1)
     end,
@@ -491,7 +524,55 @@ for i = 1, 9 do
         end
       end,
       descr_toggle_focus
-    )
+    ),
+    -- By direction client focus
+    awful.key({ modkey }, "j",
+        function()
+            awful.client.focus.global_bydirection("down")
+            if client.focus then client.focus:raise() end
+        end,
+        {description = "focus down", group = "client"}),
+
+    awful.key({ modkey }, "k",
+        function()
+            awful.client.focus.global_bydirection("up")
+            if client.focus then client.focus:raise() end
+        end,
+        {description = "focus up", group = "client"}),
+
+    awful.key({ modkey }, "h",
+        function()
+            awful.client.focus.global_bydirection("left")
+            if client.focus then client.focus:raise() end
+        end,
+        {description = "focus left", group = "client"}),
+
+    awful.key({ modkey }, "l",
+        function()
+            awful.client.focus.global_bydirection("right")
+            if client.focus then client.focus:raise() end
+        end,
+        {description = "focus right", group = "client"}),
+
+
+        -- Layout manipulation
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.global_bydirection("down")    end,
+              {description = "swap with client below", group = "client"}),
+
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.global_bydirection("up")        end,
+              {description = "swap with client above", group = "client"}),
+
+    awful.key({ modkey, "Shift"   }, "h", function () awful.client.swap.global_bydirection("left")        end,
+              {description = "swap with client left", group = "client"}),
+
+    awful.key({ modkey, "Shift"   }, "l", function () awful.client.swap.global_bydirection("right")        end,
+              {description = "swap with client right", group = "client"}),
+
+    awful.key({ modkey,           }, "Tab",
+        function ()
+           awful.spawn(apps.default.applist)
+        end,
+        {description = "Launch rofi to switch clients", group = "client"})
   )
 end
 
